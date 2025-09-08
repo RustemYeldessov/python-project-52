@@ -31,9 +31,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.http import HttpResponse
 from django.views.generic import TemplateView
+from django.contrib.auth import views as auth_views
 
 
 def home(request):
@@ -69,4 +70,7 @@ urlpatterns = [
     # path("", home, name="home"),  # используем функцию home
     # или вариант через шаблон:
     path("", TemplateView.as_view(template_name="index.html"), name="home"),
+    path('users/', include('users.urls', namespace='users')),
+    path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 ]

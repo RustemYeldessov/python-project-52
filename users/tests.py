@@ -49,3 +49,4 @@ class UsersAuthCrudTests(TestCase):
         self.assertRedirects(response, reverse('users:list'))
         self.assertFalse(User.objects.filter(pk=self.user.pk).exists())
 
+

@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'whitenoise.runserver_nostatic',
     'tasks',
+    'statuses',
     'users',
     'django_bootstrap5',
 ]

@@ -1,16 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
+from statuses.models import Status
 
 
 class Task(models.Model):
     """Модель задачи в менеджере задач."""
     
-    STATUS_CHOICES = [
-        ('pending', 'В ожидании'),
-        ('in_progress', 'В работе'),
-        ('completed', 'Завершена'),
-        ('cancelled', 'Отменена'),
-    ]
     
     title = models.CharField(
         max_length=200,
@@ -22,10 +17,10 @@ class Task(models.Model):
         verbose_name='Описание',
         help_text='Подробное описание задачи'
     )
-    status = models.CharField(
-        max_length=20,
-        choices=STATUS_CHOICES,
-        default='pending',
+    status = models.ForeignKey(
+        Status,
+        on_delete=models.PROTECT,
+        related_name='tasks',
         verbose_name='Статус'
     )
     created_by = models.ForeignKey(

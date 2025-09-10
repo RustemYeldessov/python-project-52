@@ -30,7 +30,13 @@ SECRET_KEY = os.getenv("SECRET_KEY", "dev-secret-key")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = ["webserver", "127.0.0.1", "localhost"]
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "webserver,127.0.0.1,localhost,.onrender.com").split(",")
+
+# Trust Render and local origins for CSRF in deployments
+CSRF_TRUSTED_ORIGINS = os.getenv(
+    "CSRF_TRUSTED_ORIGINS",
+    "https://*.onrender.com,http://localhost,http://127.0.0.1"
+).split(",")
 
 
 # Application definition

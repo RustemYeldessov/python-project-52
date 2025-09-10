@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+  <div class="text-center">
+    <h1 class="mb-4">Welcome to My App</h1>
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+      <a href="{% url 'login' %}" class="btn btn-primary btn-lg px-4 gap-3">Login</a>
+      <a href="{% url 'signup' %}" class="btn btn-outline-secondary btn-lg px-4">Sign up</a>
+      <a href="{% url 'users' %}" class="btn btn-success btn-lg px-4">Users</a>
+    </div>
+  </div>
+{% endblock %}

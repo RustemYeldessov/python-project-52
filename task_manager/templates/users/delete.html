@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% load i18n %}
+
+{% block content %}
+<h1>{% trans "Delete user" %}</h1>
+<p>{% trans "Are you sure you want to delete user" %} <strong>{{ user.username }}</strong>?</p>
+
+<form method="post" class="mt-3">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-danger">{% trans "Yes, delete" %}</button>
+  <a href="{% url 'users_index' %}" class="btn btn-secondary">{% trans "Cancel" %}</a>
+</form>
+{% endblock %}

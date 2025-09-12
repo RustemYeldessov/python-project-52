@@ -2,6 +2,7 @@
 URL configuration for task_manager project.
 """
 from django.contrib import admin
+from django.contrib.auth.password_validation import password_changed
 from django.urls import path, include
 from .views import IndexView
 from django.contrib.auth import views as auth_views
@@ -18,4 +19,6 @@ urlpatterns = [
 
     path('login/', auth_views.LoginView.as_view(template_name="users/login.html"), name="login"),
     path('logout/', auth_views.LogoutView.as_view(), name="logout"),
+
+    path('statuses/', include('task_manager.statuses.urls')),
 ]

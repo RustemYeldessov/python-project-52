@@ -3,7 +3,7 @@ from django.contrib.messages import get_messages
 from django.urls import reverse
 
 from task_manager.statuses.models import Status
-from task_manager.tasks.models import Task
+#from task_manager.tasks.models import Task
 
 
 @pytest.fixture

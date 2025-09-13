@@ -1,4 +1,4 @@
-from django.contrib.messages.context_processors import messages
+from django.contrib import messages
 from django.shortcuts import render
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -17,18 +17,16 @@ class StatusListView(LoginRequiredMixin, ListView):
 
 
 class StatusCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
-    model = Status
     form_class = StatusForm
     template_name = 'statuses/create.html'
     success_url = reverse_lazy('statuses_index')
     success_message = 'Статус успешно создан'
 
-
 class StatusUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Status
     form_class = StatusForm
-    template_name = 'status/update.html'
-    success_url = 'statuses_index'
+    template_name = 'statuses/update.html'
+    success_url = reverse_lazy('statuses_index')
     success_message = 'Статус успешно изменен'
 
 

@@ -4,12 +4,12 @@
 
 {% block content %}
 <div class="container wrapper flex-grow-1">
-    <h1 class="my-4">{% trans "Edit status" %}</h1>
+    <h1 class="my-4">{% trans "Редактировать статус" %}</h1>
     <form method="post">
         {% csrf_token %}
         {% bootstrap_form form %}
         {% block form_buttons %}
-            {% trans "Update" as update_text %}
+            {% trans "Редактировать" as update_text %}
             {% bootstrap_button update_text button_type="submit" button_class="btn-primary" %}
         {% endblock %}
     </form>

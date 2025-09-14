@@ -4,13 +4,13 @@
 
 {% block content %}
 <div class="container wrapper flex-grow-1">
-    <h1 class="my-4">{% trans "Delete status" %}</h1>
+    <h1 class="my-4">{% trans "Удалить статус" %}</h1>
     <p>
-      {% blocktrans %}Are you sure you want to delete {{ status }}?{% endblocktrans %}
+      {% blocktrans %}Вы уверены, что хотите удалить статус {{ status }}?{% endblocktrans %}
     </p>
     <form method="post">
         {% csrf_token %}
-        <button type="submit" class="btn btn-danger">{% trans "Yes, delete" %}</button>
+        <button type="submit" class="btn btn-danger">{% trans "Да, удалить" %}</button>
     </form>
 </div>
 {% endblock %}

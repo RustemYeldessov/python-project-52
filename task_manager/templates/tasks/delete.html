@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4">{% trans "Удалить задачу" %}</h1>
+
+    <p>{% blocktrans %}Вы уверены что хотите удалить задачу {{ task }}?{% endblocktrans %}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">{% trans "Да, удалить" %}</button>
+    </form>
+</div>
+{% endblock %}

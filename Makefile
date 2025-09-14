@@ -16,6 +16,10 @@ run:
 render-start:
 	uv run gunicorn task_manager.wsgi
 
+render-build:
+	./build.sh
+	uv run python manage.py migrate --noinput
+
 build:
 	./build.sh
 

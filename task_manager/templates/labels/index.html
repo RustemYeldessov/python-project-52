@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% load i18n %}
+
+{% block content %}
+<h1>{% trans "Labels" %}</h1>
+
+<a href="{% url 'label_create' %}" class="btn btn-primary">{% trans "Создать метку" %}</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>{% trans "Имя" %}</th>
+            <th>{% trans "Дата создания" %}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for label in labels %}
+        <tr>
+            <td>{{ label.id }}</td>
+            <td>{{ label.name }}</td>
+            <td>{{ label.created_at|date:"d.m.Y H:i" }}</td>
+            <td>
+                <a href="{% url 'label_update' label.id %}">{% trans "Редактировать" %}</a>
+                <br>
+                <a href="{% url 'label_delete' label.id %}">{% trans "Удалить" %}</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">{% trans "Нет меток" %}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

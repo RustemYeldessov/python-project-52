@@ -51,8 +51,7 @@ class UserLoginView(SuccessMessageMixin, LoginView):
 
     def form_valid(self, form):
         messages.success(self.request, _("Вы залогинены"))
-        msgs = list(messages.get_messages(self.request))
-        logger.info("LOGIN_MESSAGES after messages.success: %s", [str(m) for m in msgs])
+        self.request.session['just_logged_in'] = True
         return super().form_valid(form)
 
     def get_success_url(self):

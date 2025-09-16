@@ -8,10 +8,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', IndexView.as_view(), name="index"),
 
-    path('users/', user_views.UsersListView.as_view(), name="users_index"),
-    path('users/create/', user_views.UserCreateView.as_view(), name="users_create"),
-    path('users/<int:pk>/update/', user_views.UserUpdateView.as_view(), name="users_update"),
-    path('users/<int:pk>/delete/', user_views.UserDeleteView.as_view(), name="users_delete"),
+    path('users/', include('task_manager.users.urls')),
 
     path('login/', user_views.UserLoginView.as_view(), name="login"),
     path('logout/', user_views.UserLogoutView.as_view(), name="logout"),

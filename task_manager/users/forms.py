@@ -77,20 +77,60 @@ class UserLoginForm(AuthenticationForm):
 
 
 class UserUpdateForm(forms.ModelForm):
+    password1 = forms.CharField(
+        required=False,
+        label=gettext_lazy("Пароль"),
+        widget=forms.PasswordInput,
+        help_text=gettext_lazy("Оставьте пустым, если не хотите изменять пароль."),
+    )
+    password2 = forms.CharField(
+        required=False,
+        label=gettext_lazy("Подтверждение пароля"),
+        widget=forms.PasswordInput,
+        help_text=gettext_lazy("Повторите пароль для подтверждения."),
+    )
     class Meta:
         model = User
         fields = [
             'first_name',
             'last_name',
             'username',
+            'password1',
+            'password2',
         ]
         labels = {
             'first_name': gettext_lazy('Имя'),
             'last_name': gettext_lazy('Фамилия'),
             'username': gettext_lazy('Имя пользователя'),
+            'password1': gettext_lazy('Пароль'),
+            'password2': gettext_lazy('Подтверждение пароля'),
         }
         widgets = {
             'first_name': forms.TextInput(attrs={'required': True}),
             'last_name': forms.TextInput(attrs={'required': True}),
             'username': forms.TextInput(attrs={'required': True}),
         }
+
+    def clean(self):
+        cleaned_data = super().clean()
+        password1 = cleaned_data.get("password1")
+        password2 = cleaned_data.get("password2")
+
+        if password1 or password2:
+            if password1 != password2:
+                self.add_error("password2", gettext_lazy("Пароли не совпадают."))
+            if password1 and len(password1) < 3:
+                self.add_error(
+                    "password2",
+                    gettext_lazy("Введённый пароль слишком короткий. Он должен содержать не менее 3 символов."),
+                )
+        return cleaned_data
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        password = self.cleaned_data.get("password1")
+        if password:
+            user.set_password(password)
+        if commit:
+            user.save()
+        return user

@@ -1,12 +1,30 @@
 {% extends "layout.html" %}
-{% load django_bootstrap5 i18n %}
+{% load i18n %}
 
 {% block content %}
-<h1>{% trans "Login" %}</h1>
+<h1>{% trans "Вход" %}</h1>
 
 <form method="post">
   {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit" class="btn btn-primary">{% trans "Login" %}</button>
+  <div class="mb-3">
+    <input
+      type="text"
+      name="username"
+      placeholder="Имя пользователя"
+      class="form-control"
+      required
+      autofocus
+    />
+  </div>
+  <div class="mb-3">
+    <input
+      type="password"
+      name="password"
+      placeholder="Пароль"
+      class="form-control"
+      required
+    />
+  </div>
+  <button type="submit" class="btn btn-primary">{% trans "Вход" %}</button>
 </form>
 {% endblock %}

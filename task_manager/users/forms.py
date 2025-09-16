@@ -8,15 +8,15 @@ User = get_user_model()
 class UserCreateForm(UserCreationForm):
     password1 = forms.CharField(
         required=True,
-        label=gettext_lazy("Password"),
+        label=gettext_lazy("Пароль"),
         widget=forms.PasswordInput,
-        help_text=gettext_lazy("Your password must contain at least 3 characters.")
+        help_text=gettext_lazy("Пароль должен содержать не менее 3 символов.")
     )
     password2 = forms.CharField(
         required=True,
-        label=gettext_lazy("Confirm Password"),
+        label=gettext_lazy("Подтверждение пароля"),
         widget=forms.PasswordInput,
-        help_text=gettext_lazy("Enter the same password again for verification.")
+        help_text=gettext_lazy("Введите тот же пароль ещё раз для проверки.")
     )
 
     class Meta:
@@ -29,9 +29,9 @@ class UserCreateForm(UserCreationForm):
             'password2'
         ]
         labels = {
-            'first_name': gettext_lazy('First name'),
-            'last_name': gettext_lazy('Last name'),
-            'username': gettext_lazy('Username'),
+            'first_name': gettext_lazy('Имя'),
+            'last_name': gettext_lazy('Фамилия'),
+            'username': gettext_lazy('Имя пользователя'),
         }
         widgets = {
             'first_name': forms.TextInput(attrs={'required': True}),
@@ -46,13 +46,12 @@ class UserCreateForm(UserCreationForm):
 
         if password1 and password2:
             if password1 != password2:
-                self.add_error("password2", gettext_lazy("Passwords do not match."))
+                self.add_error("password2", gettext_lazy("Пароли не совпадают."))
 
             if len(password1) < 3:
                 self.add_error(
                     "password2",
-                    gettext_lazy("The entered password is too short. \
-                        It must contain at least 3 characters."),
+                    gettext_lazy("Введённый пароль слишком короткий. Он должен содержать не менее 3 символов."),
                 )
         return cleaned_data
 
@@ -68,10 +67,10 @@ class UserCreateForm(UserCreationForm):
 
 class UserLoginForm(AuthenticationForm):
     username = forms.CharField(
-        label=gettext_lazy('Username'),
+        label=gettext_lazy('Имя пользователя'),
         widget=forms.TextInput(attrs={'class': 'form-control'})
     )
     password = forms.CharField(
-        label=gettext_lazy("Password"),
+        label=gettext_lazy("Пароль"),
         widget=forms.PasswordInput(attrs={'class': 'form-control'})
     )

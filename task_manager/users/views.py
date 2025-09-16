@@ -1,3 +1,4 @@
+import logging
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
@@ -9,6 +10,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 from .forms import UserCreateForm, UserLoginForm
 
+logger = logging.getLogger(__name__)
 
 class UsersListView(ListView):
     model = User
@@ -49,6 +51,8 @@ class UserLoginView(SuccessMessageMixin, LoginView):
 
     def form_valid(self, form):
         messages.success(self.request, _("Вы залогинены"))
+        msgs = list(messages.get_messages(self.request))
+        logger.info("LOGIN_MESSAGES after messages.success: %s", [str(m) for m in msgs])
         return super().form_valid(form)
 
     def get_success_url(self):

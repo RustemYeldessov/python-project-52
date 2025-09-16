@@ -74,3 +74,23 @@ class UserLoginForm(AuthenticationForm):
         label=gettext_lazy("Пароль"),
         widget=forms.PasswordInput(attrs={'class': 'form-control'})
     )
+
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = [
+            'first_name',
+            'last_name',
+            'username',
+        ]
+        labels = {
+            'first_name': gettext_lazy('Имя'),
+            'last_name': gettext_lazy('Фамилия'),
+            'username': gettext_lazy('Имя пользователя'),
+        }
+        widgets = {
+            'first_name': forms.TextInput(attrs={'required': True}),
+            'last_name': forms.TextInput(attrs={'required': True}),
+            'username': forms.TextInput(attrs={'required': True}),
+        }

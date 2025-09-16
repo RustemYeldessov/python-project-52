@@ -8,7 +8,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
-from .forms import UserCreateForm, UserLoginForm
+from .forms import UserCreateForm, UserLoginForm, UserUpdateForm
 
 logger = logging.getLogger(__name__)
 
@@ -29,7 +29,7 @@ class UserCreateView(SuccessMessageMixin, CreateView):
 class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = User
     template_name = "users/update.html"
-    fields = ("username", "first_name", "last_name", "password")
+    form_class = UserUpdateForm
     success_url = reverse_lazy("users_index")
 
     def test_func(self):

@@ -50,7 +50,7 @@ class UserLoginView(SuccessMessageMixin, LoginView):
     template_name = "users/login.html"
 
     def form_valid(self, form):
-        messages.success(self.request, _("Вы залогинены"))
+        # messages.success(self.request, _("Вы залогинены"))
         self.request.session['just_logged_in'] = True
         return super().form_valid(form)
 

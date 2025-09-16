@@ -20,8 +20,8 @@
       <td>{{ user.username }}</td>
       <td>{{ user.first_name }} {{ user.last_name }}</td>
       <td>
-        <a href="{% url 'users_update' user.id %}" class="btn btn-sm btn-outline-primary">{% trans "Edit" %}</a>
-        <a href="{% url 'users_delete' user.id %}" class="btn btn-sm btn-outline-danger">{% trans "Delete" %}</a>
+        <a href="{% url 'users_update' user.id %}" class="btn btn-sm btn-outline-primary">{% trans "Изменить" %}</a>
+        <a href="{% url 'users_delete' user.id %}" class="btn btn-sm btn-outline-danger">{% trans "Удалить" %}</a>
       </td>
     </tr>
     {% empty %}

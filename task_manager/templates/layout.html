@@ -11,7 +11,7 @@
     <link rel="icon" href="{% static 'images/favicon.ico' %}">
     <!-- Bootstrap -->
     {% bootstrap_css %}
-    </head>
+  </head>
   <body class="d-flex flex-column min-vh-100">
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -23,7 +23,6 @@
 
         <div class="collapse navbar-collapse" id="navbarContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            
             <li class="nav-item">
               <a class="nav-link" href="{% url 'users_index' %}">{% trans "Пользователи" %}</a>
             </li>
@@ -65,14 +64,7 @@
     </nav>
 
     <div class="container wrapper flex-grow-1 mt-4">
-      {% if messages %}
-        {% for message in messages %}
-          <div class="alert alert-{{ message.tags }}" role="alert">
-            {{ message }}
-          </div>
-        {% endfor %}
-      {% endif %}
-
+      {% bootstrap_messages %}
       {% block content %}
       {% endblock %}
     </div>

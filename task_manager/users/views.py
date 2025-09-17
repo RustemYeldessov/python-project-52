@@ -1,6 +1,7 @@
 import logging
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
@@ -35,6 +36,10 @@ class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def test_func(self):
         return self.request.user == self.get_object()
 
+    def handle_no_permission(self):
+        messages.error(self.request, _("У вас нет прав для изменения другого пользователя."))
+        return redirect("users_index")
+
 
 class UserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = User
@@ -43,6 +48,10 @@ class UserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         return self.request.user == self.get_object()
+
+    def handle_no_permission(self):
+        messages.error(self.request, _("У вас нет прав для изменения другого пользователя."))
+        return redirect("users_index")
 
 
 class UserLoginView(SuccessMessageMixin, LoginView):

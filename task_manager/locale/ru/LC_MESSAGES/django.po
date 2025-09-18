@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-18 15:54+0000\n"
+"POT-Creation-Date: 2025-09-18 16:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -116,10 +116,8 @@ msgid "Task updated successfully"
 msgstr "Задача успешно изменена"
 
 #: task_manager/tasks/views.py:64
-#, fuzzy
-#| msgid "Status deleted successfully"
-msgid "Task deleted successfully"
-msgstr "Статус успешно удален"
+msgid "Задача успешно удалена"
+msgstr ""
 
 #: task_manager/tasks/views.py:73
 msgid "Only the author can delete an issue."
@@ -389,6 +387,11 @@ msgstr "Вы залогинены"
 #: task_manager/users/views.py:100
 msgid "You are logged out"
 msgstr "Вы разлогинены"
+
+#, fuzzy
+#~| msgid "Status deleted successfully"
+#~ msgid "Task deleted successfully"
+#~ msgstr "Статус успешно удален"
 
 #, fuzzy
 #~| msgid "Task deleted successfully"

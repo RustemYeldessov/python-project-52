@@ -5,7 +5,9 @@
 <div class="container">
     <h1 class="my-4">{% trans "Delete task" %}</h1>
 
-    <p>{% blocktrans %}Are you sure you want to delete the task {{ task }}?{% endblocktrans %}</p>
+    <div class="alert alert-warning" role="alert">
+        {% blocktrans %}Are you sure you want to delete the task {{ task }}?{% endblocktrans %}
+    </div>
 
     <form method="post">
         {% csrf_token %}

@@ -359,7 +359,7 @@ msgstr "У вас нет прав для изменения другого по�
 
 #: task_manager/users/views.py:52
 msgid "User deleted successfully"
-msgstr "Пользователь успешно удалён"
+msgstr "Пользователь успешно удален"
 
 #: task_manager/users/views.py:61
 msgid "You are not logged in! Please log in."

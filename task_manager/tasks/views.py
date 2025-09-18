@@ -71,6 +71,14 @@ class TaskDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         messages.error(self.request, _("Only the author can delete an issue."))
         return redirect(self.success_url)
 
+    def get(self, request, *args, **kwargs):
+        task = self.get_object()
+        messages.info(
+            request,
+            _("Are you sure you want to delete the task %(task)s?") % {"task": task},
+        )
+        return super().get(request, *args, **kwargs)
+
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, _("Task deleted successfully"))
         return super().delete(request, *args, **kwargs)

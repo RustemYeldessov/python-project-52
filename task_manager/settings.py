@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 import os
 import dj_database_url
-from django.conf.global_settings import LOGIN_URL
+import rollbar
 from dotenv import load_dotenv
 from pathlib import Path
 
@@ -77,7 +77,6 @@ ROLLBAR = {
     'root': BASE_DIR,
 }
 
-import rollbar
 rollbar.init(**ROLLBAR)
 
 LOGIN_URL = 'login'

@@ -13,6 +13,7 @@ def dummy_get_response(request):
 
 @pytest.mark.django_db
 class TestUsers:
+
     # ---------- INDEX ----------
     def test_index_view(self, client):
         url = reverse("index")
@@ -23,43 +24,46 @@ class TestUsers:
 
     # ---------- CREATE ----------
     def test_user_registration(self, client):
-        url = reverse('user_create')
+        url = reverse("user_create")
         data = {
-            'username': 'newuser',
-            'first_name': 'First',
-            'last_name': 'Last',
-            'password1': 'complexpass123',
-            'password2': 'complexpass123',
+            "username": "newuser",
+            "first_name": "First",
+            "last_name": "Last",
+            "password1": "complexpass123",
+            "password2": "complexpass123",
         }
         response = client.post(url, data)
         assert response.status_code == 302
-        assert get_user_model().objects.filter(username='newuser').exists()
+        assert get_user_model().objects.filter(username="newuser").exists()
 
     # ---------- UPDATE ----------
     def test_user_update(self, client):
         User = get_user_model()
-        user = User.objects.create_user(username='u1', password='pass123')
-        client.login(username='u1', password='pass123')
+        user = User.objects.create_user(username="u1", password="pass123")
+        client.login(username="u1", password="pass123")
 
-        url = reverse('user_update', kwargs={'pk': user.id})
-        response = client.post(url, {
-            'username': 'u1_updated',
-            'first_name': 'Name',
-            'last_name': 'Surname',
-            'password1': 'newpass12345',
-            'password2': 'newpass12345',
-        })
+        url = reverse("user_update", kwargs={"pk": user.id})
+        response = client.post(
+            url,
+            {
+                "username": "u1_updated",
+                "first_name": "Name",
+                "last_name": "Surname",
+                "password1": "newpass12345",
+                "password2": "newpass12345",
+            },
+        )
         assert response.status_code == 302
         user.refresh_from_db()
-        assert user.username == 'u1_updated'
+        assert user.username == "u1_updated"
 
     # ---------- DELETE ----------
     def test_user_delete(self, client):
         User = get_user_model()
-        user = User.objects.create_user(username='u1', password='pass123')
-        client.login(username='u1', password='pass123')
+        user = User.objects.create_user(username="u1", password="pass123")
+        client.login(username="u1", password="pass123")
 
-        url = reverse('user_delete', kwargs={'pk': user.id})
+        url = reverse("user_delete", kwargs={"pk": user.id})
         response = client.post(url)
         assert response.status_code == 302
         assert not User.objects.filter(id=user.id).exists()
@@ -67,13 +71,16 @@ class TestUsers:
     # ---------- LOGIN / LOGOUT ----------
     def test_login_logout(self, client):
         User = get_user_model()
-        User.objects.create_user(username='u1', password='pass123')
+        User.objects.create_user(username="u1", password="pass123")
 
-        login_url = reverse('login')
-        response = client.post(login_url, {'username': 'u1', 'password': 'pass123'})
+        login_url = reverse("login")
+        response = client.post(
+            login_url,
+            {"username": "u1", "password": "pass123"},
+        )
         assert response.status_code == 302
 
-        logout_url = reverse('logout')
+        logout_url = reverse("logout")
         response = client.get(logout_url)
         assert response.status_code == 302
 
@@ -85,19 +92,19 @@ def test_get_extra_data():
     exc = Exception()
 
     data = middleware.get_extra_data(request, exc)
-    assert 'feature_flags' in data
-    assert data['feature_flags'] == ['feature_1', 'feature_2']
+    assert "feature_flags" in data
+    assert data["feature_flags"] == ["feature_1", "feature_2"]
 
 
 @pytest.mark.django_db
 def test_get_payload_data_authenticated_user():
     User = get_user_model()
     user = User.objects.create_user(
-        username='testuser',
-        email='test@example.com',
-        password='pass',
-        first_name='Test',
-        last_name='User'
+        username="testuser",
+        email="test@example.com",
+        password="pass",
+        first_name="Test",
+        last_name="User",
     )
     request = types.SimpleNamespace()
     request.user = user
@@ -106,9 +113,9 @@ def test_get_payload_data_authenticated_user():
     middleware = CustomRollbarNotifierMiddleware(dummy_get_response)
     payload = middleware.get_payload_data(request, exc)
 
-    assert 'person' in payload
-    assert payload['person']['username'] == 'testuser'
-    assert payload['person']['email'] == 'test@example.com'
+    assert "person" in payload
+    assert payload["person"]["username"] == "testuser"
+    assert payload["person"]["email"] == "test@example.com"
 
 
 def test_get_payload_data_anonymous_user():

@@ -1,6 +1,8 @@
 from rollbar.contrib.django.middleware import RollbarNotifierMiddleware
 
+
 class CustomRollbarNotifierMiddleware(RollbarNotifierMiddleware):
+
     def get_extra_data(self, request, exc):
         return {
             "trace_id": "aabbccddeeff",  # можно, например, генерировать UUID

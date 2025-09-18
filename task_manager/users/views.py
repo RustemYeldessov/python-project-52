@@ -1,4 +1,6 @@
 import logging
+from http.client import responses
+
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
@@ -43,7 +45,7 @@ class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixi
         return redirect("users_index")
 
 
-class UserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+class UserDeleteView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, DeleteView):
     model = User
     template_name = "users/delete.html"
     success_url = reverse_lazy("users_index")

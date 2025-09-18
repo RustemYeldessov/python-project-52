@@ -23,7 +23,7 @@ class TaskListView(LoginRequiredMixin, ListView):
 
         queryset = self.filterset.qs
 
-        if self.request.GET.get("self_task"):
+        if self.request.GET.get("self_tasks"):
             queryset = queryset.filter(author=self.request.user)
 
         return queryset

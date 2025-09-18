@@ -27,3 +27,9 @@ class TaskFilter(django_filters.FilterSet):
     class Meta:
         model = Task
         fields = ["status", "executor", "labels"]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.filters['executor'].field.label_from_instance = (
+            lambda u: f"{u.first_name} {u.last_name}".strip()
+        )

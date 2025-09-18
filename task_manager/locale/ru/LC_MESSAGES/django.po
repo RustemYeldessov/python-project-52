@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-18 09:03+0000\n"
+"POT-Creation-Date: 2025-09-18 09:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,7 +38,7 @@ msgid ""
 "used"
 msgstr "Невозможно удалить метку, потому что она используется"
 
-#: task_manager/statuses/forms.py:11
+#: task_manager/statuses/forms.py:11 task_manager/tasks/status_forms.py:10
 #: task_manager/templates/labels/index.html:13
 #: task_manager/templates/statuses/index.html:15
 #: task_manager/templates/tasks/index.html:38

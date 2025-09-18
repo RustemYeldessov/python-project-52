@@ -43,7 +43,7 @@ class TaskCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = TaskForm
     template_name = "tasks/create.html"
     success_url = reverse_lazy("tasks_index")
-    success_message = _("Задача успешно создана")
+    success_message = _("Task created successfully")
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -54,7 +54,7 @@ class TaskUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     form_class = TaskForm
     template_name = "tasks/update.html"
     success_url = reverse_lazy("tasks_index")
-    success_message = _("Задача успешно изменена")
+    success_message = _("Task updated successfully")
 
 class TaskDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Task
@@ -68,9 +68,9 @@ class TaskDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def handle_no_permission(self):
         if not self.request.user.is_authenticated:
             return super().handle_no_permission()
-        messages.error(self.request, _("Только автор может удалить задачу"))
+        messages.error(self.request, _("Only the author can delete an issue."))
         return redirect(self.success_url)
 
     def delete(self, request, *args, **kwargs):
-        messages.success(self.request, _("Задача успешно удалена"))
+        messages.success(self.request, _("Task deleted successfully"))
         return super().delete(request, *args, **kwargs)

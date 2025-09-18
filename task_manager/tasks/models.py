@@ -14,37 +14,37 @@ class Task(models.Model):
     status = models.ForeignKey(
         Status,
         on_delete=models.PROTECT,
-        verbose_name=_("Статус"),
+        verbose_name=_('Status'),
         related_name="tasks"
     )
     labels = models.ManyToManyField(
         Label,
-        related_name="tasks",
+        related_name='tasks',
         blank=True,
-        verbose_name=_("Метки")
+        verbose_name=_('Labels')
     )
     author = models.ForeignKey(
         User,
         on_delete=models.PROTECT,
-        verbose_name=_("Автор"),
-        related_name="authored_tasks",
+        verbose_name=_('Author'),
+        related_name="authored_tasks"
     )
     executor = models.ForeignKey(
         User,
         on_delete=models.PROTECT,
-        verbose_name=_("Исполнитель"),
+        verbose_name=_('Executor'),
         related_name="executed_tasks",
         blank=True,
         null=True
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
-        verbose_name=_("Дата создания")
-    )
+        verbose_name=_('Creation date')
+        )
 
     def __str__(self):
         return self.name
 
     class Meta:
-        verbose_name = _("Task")
-        verbose_name_plural = _("Tasks")
+        verbose_name = _('Task')
+        verbose_name_plural = _('Tasks')

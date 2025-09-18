@@ -4,9 +4,9 @@
 
 {% block content %}
 <div class="container wrapper flex-grow-1">
-    <h1 class="my-4">{% trans "Удалить метку" %}</h1>
+    <h1 class="my-4">{% trans "Delete label" %}</h1>
     <p>
-      {% blocktrans %}Вы уверены, что хотите удалить метку {{ label }}?{% endblocktrans %}
+      {% blocktrans %}Are you sure you want to delete {{ label }}?{% endblocktrans %}
     </p>
     <form method="post">
         {% csrf_token %}

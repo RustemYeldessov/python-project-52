@@ -296,7 +296,7 @@ msgstr "Полное имя"
 
 #: task_manager/templates/users/login.html:11
 msgid "Log in"
-msgstr "Войти"
+msgstr "Вход"
 
 #: task_manager/templates/users/update.html:6
 msgid "Update user"
@@ -350,7 +350,7 @@ msgstr "Пользователь успешно зарегистрирован"
 
 #: task_manager/users/views.py:41 task_manager/users/views.py:63
 msgid "You do not have permission to perform this action."
-msgstr "У вас нет прав для выполнения этого действия"
+msgstr "У вас нет прав для изменения другого пользователя."
 
 #: task_manager/users/views.py:49
 msgid "User deleted successfully"
@@ -368,8 +368,8 @@ msgstr "Невозможно удалить пользователя, потом
 
 #: task_manager/users/views.py:84
 msgid "You are logged in"
-msgstr "Вы вошли в систему"
+msgstr "Вы залогинены"
 
 #: task_manager/users/views.py:96
 msgid "You are logged out"
-msgstr "Вы вышли из системы"
+msgstr "Вы разлогинены"

@@ -1,5 +1,4 @@
 import logging
-from http.client import responses
 
 from django.contrib import messages
 from django.contrib.auth import get_user_model
@@ -17,6 +16,7 @@ from .forms import UserCreateForm, UserLoginForm, UserUpdateForm
 logger = logging.getLogger(__name__)
 User = get_user_model()
 
+
 class UsersListView(ListView):
     model = User
     template_name = "users/index.html"
@@ -31,7 +31,12 @@ class UserCreateView(SuccessMessageMixin, CreateView):
     success_message = _("User created successfully")
 
 
-class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView):
+class UserUpdateView(
+    LoginRequiredMixin,
+    UserPassesTestMixin,
+    SuccessMessageMixin,
+    UpdateView,
+):
     model = User
     template_name = "users/update.html"
     form_class = UserUpdateForm
@@ -42,11 +47,19 @@ class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixi
         return self.request.user == self.get_object()
 
     def handle_no_permission(self):
-        messages.error(self.request, _("You do not have permission to perform this action."))
+        messages.error(
+            self.request,
+            _("You do not have permission to perform this action."),
+        )
         return redirect("users_index")
 
 
-class UserDeleteView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, DeleteView):
+class UserDeleteView(
+    LoginRequiredMixin,
+    UserPassesTestMixin,
+    SuccessMessageMixin,
+    DeleteView,
+):
     model = User
     template_name = "users/delete.html"
     success_url = reverse_lazy("users_index")

@@ -2,7 +2,7 @@ import logging
 from http.client import responses
 
 from django.contrib import messages
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
@@ -15,6 +15,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import UserCreateForm, UserLoginForm, UserUpdateForm
 
 logger = logging.getLogger(__name__)
+User = get_user_model()
 
 class UsersListView(ListView):
     model = User

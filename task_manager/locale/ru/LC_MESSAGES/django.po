@@ -348,28 +348,32 @@ msgstr "Фамилия"
 msgid "User created successfully"
 msgstr "Пользователь успешно зарегистрирован"
 
-#: task_manager/users/views.py:41 task_manager/users/views.py:63
+#: task_manager/users/views.py:36
+msgid "User updated successfully"
+msgstr "Пользователь успешно изменен"
+
+#: task_manager/users/views.py:42 task_manager/users/views.py:64
 msgid "You do not have permission to perform this action."
 msgstr "У вас нет прав для изменения другого пользователя."
 
-#: task_manager/users/views.py:49
+#: task_manager/users/views.py:50
 msgid "User deleted successfully"
 msgstr "Пользователь успешно удалён"
 
-#: task_manager/users/views.py:58
+#: task_manager/users/views.py:59
 msgid "You are not logged in! Please log in."
 msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
 
-#: task_manager/users/views.py:73
+#: task_manager/users/views.py:74
 msgid ""
 "It is impossible to delete the user                     because it is being "
 "used"
 msgstr "Невозможно удалить пользователя, потому что он используется"
 
-#: task_manager/users/views.py:84
+#: task_manager/users/views.py:85
 msgid "You are logged in"
 msgstr "Вы залогинены"
 
-#: task_manager/users/views.py:96
+#: task_manager/users/views.py:97
 msgid "You are logged out"
 msgstr "Вы разлогинены"

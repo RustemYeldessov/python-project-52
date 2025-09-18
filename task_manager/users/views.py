@@ -28,11 +28,12 @@ class UserCreateView(SuccessMessageMixin, CreateView):
     success_message = _("User created successfully")
 
 
-class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView):
     model = User
     template_name = "users/update.html"
     form_class = UserUpdateForm
     success_url = reverse_lazy("users_index")
+    success_message = _("User updated successfully")
 
     def test_func(self):
         return self.request.user == self.get_object()

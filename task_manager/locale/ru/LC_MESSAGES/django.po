@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-18 09:15+0000\n"
+"POT-Creation-Date: 2025-09-18 15:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -115,13 +115,15 @@ msgstr "Задача успешно создана"
 msgid "Task updated successfully"
 msgstr "Задача успешно изменена"
 
-#: task_manager/tasks/views.py:71
+#: task_manager/tasks/views.py:64
+#, fuzzy
+#| msgid "Status deleted successfully"
+msgid "Task deleted successfully"
+msgstr "Статус успешно удален"
+
+#: task_manager/tasks/views.py:73
 msgid "Only the author can delete an issue."
 msgstr "Задачу может удалить только её автор"
-
-#: task_manager/tasks/views.py:75
-msgid "Task deleted successfully"
-msgstr "Задача успешно удалена"
 
 #: task_manager/templates/index.html:10
 msgid "Hello from Hexlet!"
@@ -157,7 +159,7 @@ msgstr "Вы уверены, что хотите удалить %(label)s?"
 
 #: task_manager/templates/labels/delete.html:13
 #: task_manager/templates/statuses/delete.html:13
-#: task_manager/templates/tasks/delete.html:12
+#: task_manager/templates/tasks/delete.html:14
 #: task_manager/templates/users/delete.html:12
 msgid "Yes, delete"
 msgstr "Да, удалить"
@@ -256,7 +258,7 @@ msgstr "Создать задачу"
 msgid "Delete task"
 msgstr "Удаление задачи"
 
-#: task_manager/templates/tasks/delete.html:8
+#: task_manager/templates/tasks/delete.html:9
 #, python-format
 msgid "Are you sure you want to delete the task %(task)s?"
 msgstr "Вы уверены, что хотите удалить задачу %(task)s?"
@@ -354,36 +356,41 @@ msgstr "Имя"
 msgid "Last Name"
 msgstr "Фамилия"
 
-#: task_manager/users/views.py:30
+#: task_manager/users/views.py:31
 msgid "User created successfully"
 msgstr "Пользователь успешно зарегистрирован"
 
-#: task_manager/users/views.py:38
+#: task_manager/users/views.py:39
 msgid "User updated successfully"
 msgstr "Пользователь успешно изменен"
 
-#: task_manager/users/views.py:44 task_manager/users/views.py:66
+#: task_manager/users/views.py:45 task_manager/users/views.py:67
 msgid "You do not have permission to perform this action."
 msgstr "У вас нет прав для изменения другого пользователя."
 
-#: task_manager/users/views.py:52
+#: task_manager/users/views.py:53
 msgid "User deleted successfully"
 msgstr "Пользователь успешно удален"
 
-#: task_manager/users/views.py:61
+#: task_manager/users/views.py:62
 msgid "You are not logged in! Please log in."
 msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
 
-#: task_manager/users/views.py:76
+#: task_manager/users/views.py:77
 msgid ""
 "It is impossible to delete the user                     because it is being "
 "used"
 msgstr "Невозможно удалить пользователя, потому что он используется"
 
-#: task_manager/users/views.py:87
+#: task_manager/users/views.py:88
 msgid "You are logged in"
 msgstr "Вы залогинены"
 
-#: task_manager/users/views.py:99
+#: task_manager/users/views.py:100
 msgid "You are logged out"
 msgstr "Вы разлогинены"
+
+#, fuzzy
+#~| msgid "Task deleted successfully"
+#~ msgid "Task successfully deleted"
+#~ msgstr "Задача успешно удалена"

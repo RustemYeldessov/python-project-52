@@ -61,12 +61,9 @@
                         {% trans "Update" %}
                     </a>
                     <br>
-                    <form method="post" action="{% url 'task_delete' task.id %}" class="d-inline">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-link p-0">
-                            {% trans "Delete" %}
-                        </button>
-                    </form>
+                    <a href="{% url 'task_delete' task.id %}">
+                        {% trans "Delete" %}
+                    </a>
                 </td>
             </tr>
             {% empty %}

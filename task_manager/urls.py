@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from .views import IndexView
+from django.contrib.auth import views as auth_views
 from task_manager.users import views as user_views
 
 urlpatterns = [

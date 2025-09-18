@@ -56,16 +56,12 @@ class TaskUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_url = reverse_lazy("tasks_index")
     success_message = _("Task updated successfully")
 
-class TaskDeleteView(
-        LoginRequiredMixin,
-        SuccessMessageMixin,
-        UserPassesTestMixin,
-        DeleteView,
-    ):
+class TaskDeleteView(LoginRequiredMixin, SuccessMessageMixin,
+                     UserPassesTestMixin, DeleteView):
     model = Task
     template_name = 'tasks/delete.html'
     success_url = reverse_lazy('tasks_index')
-    success_message = _("Task deleted successfully")
+    success_message = _("Задача успешно удалена")
 
     def test_func(self):
         task = self.get_object()
@@ -77,6 +73,4 @@ class TaskDeleteView(
         messages.error(self.request, _("Only the author can delete an issue."))
         return redirect(self.success_url)
 
-    def delete(self, request, *args, **kwargs):
-        messages.success(request, _("Task deleted successfully"))
-        return super().delete(request, *args, **kwargs)
+    # Удаляем кастомный delete(); SuccessMessageMixin для DeleteView не используется

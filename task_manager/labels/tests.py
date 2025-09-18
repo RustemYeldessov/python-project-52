@@ -47,7 +47,10 @@ class TestLabelCRUD:
         assert "Создать метку" in response.content.decode()
 
     def test_create_label_post(self, logged_client):
-        response = logged_client.post(reverse('label_create'), {'name': 'Feature'})
+        response = logged_client.post(
+            reverse('label_create'),
+            {'name': 'Feature'},
+        )
         assert response.status_code == 302
         assert Label.objects.filter(name='Feature').exists()
 
@@ -58,7 +61,10 @@ class TestLabelCRUD:
         assert "Редактировать метку" in response.content.decode()
 
     def test_update_label_post(self, logged_client, label):
-        response = logged_client.post(reverse('label_update', args=[label.id]), {'name': 'Hotfix'})
+        response = logged_client.post(
+            reverse('label_update', args=[label.id]),
+            {'name': 'Hotfix'},
+        )
         assert response.status_code == 302
         label.refresh_from_db()
         assert label.name == 'Hotfix'

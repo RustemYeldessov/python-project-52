@@ -33,12 +33,15 @@ class TaskListView(LoginRequiredMixin, ListView):
         context["filter"] = self.filterset
         return context
 
+
 class TaskDetailView(LoginRequiredMixin, DetailView):
     model = Task
     template_name = "tasks/show.html"
     context_object_name = "task"
 
-class TaskCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+
+class TaskCreateView(LoginRequiredMixin, SuccessMessageMixin,
+                     CreateView):
     model = Task
     form_class = TaskForm
     template_name = "tasks/create.html"
@@ -49,12 +52,15 @@ class TaskCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
-class TaskUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+
+class TaskUpdateView(LoginRequiredMixin, SuccessMessageMixin,
+                     UpdateView):
     model = Task
     form_class = TaskForm
     template_name = "tasks/update.html"
     success_url = reverse_lazy("tasks_index")
     success_message = _("Task updated successfully")
+
 
 class TaskDeleteView(LoginRequiredMixin, SuccessMessageMixin,
                      UserPassesTestMixin, DeleteView):
@@ -72,5 +78,3 @@ class TaskDeleteView(LoginRequiredMixin, SuccessMessageMixin,
             return super().handle_no_permission()
         messages.error(self.request, _("Only the author can delete an issue."))
         return redirect(self.success_url)
-
-    # Удаляем кастомный delete(); SuccessMessageMixin для DeleteView не используется

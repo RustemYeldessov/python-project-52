@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  sonarcloud:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -19,6 +19,9 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install uv
+        run: pip install uv
+
       - name: Install dependencies
         run: make ci-install
 
@@ -29,14 +32,7 @@ jobs:
         run: make ci-test
 
       - name: SonarCloud Scan
-        uses: SonarSource/sonarqube-scan-action@v5
+        uses: SonarSource/sonarcloud-github-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: https://sonarcloud.io
-        with:
-          args: >
-            -Dsonar.projectKey=RustemYeldessov_python-project-52
-            -Dsonar.organization=RustemYeldessov
-            -Dsonar.python.coverage.reportPaths=coverage.xml
-            -Dsonar.coverage.exclusions=**/tests/**
-            -Dsonar.exclusions=**/tests/**
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

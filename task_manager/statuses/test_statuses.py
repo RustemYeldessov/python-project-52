@@ -7,14 +7,14 @@ from task_manager.tasks.models import Task
 from .models import Status
 
 User = get_user_model()
-
+TEST_USER_PASSWORD = "testpass123"
 
 @pytest.mark.django_db
 class TestStatusCRUD:
     @pytest.fixture
     def logged_client(self, client):
-        User.objects.create_user(username='user1', password='testpass123')
-        client.login(username='user1', password='testpass123')
+        User.objects.create_user(username='user1', password=TEST_USER_PASSWORD)
+        client.login(username='user1', password=TEST_USER_PASSWORD)
         return client
 
     def test_create_status(self, logged_client):

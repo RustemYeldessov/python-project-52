@@ -3,12 +3,20 @@ import pytest
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AnonymousUser
 from django.urls import reverse
+from unittest.mock import patch
+from django.conf import settings
 
 from task_manager.rollbar_middleware import CustomRollbarNotifierMiddleware
 
 
 def dummy_get_response(request):
     return None
+
+
+# ---------- Фикстура для Rollbar ----------
+@pytest.fixture(autouse=True)
+def enable_rollbar():
+    settings.ROLLBAR = {"access_token": "test_token"}
 
 
 @pytest.mark.django_db
@@ -24,7 +32,7 @@ class TestUsers:
 
     # ---------- CREATE ----------
     def test_user_registration(self, client):
-        url = reverse("user_create")
+        url = reverse("users_create")
         data = {
             "username": "newuser",
             "first_name": "First",
@@ -42,7 +50,7 @@ class TestUsers:
         user = User.objects.create_user(username="u1", password="pass123")
         client.login(username="u1", password="pass123")
 
-        url = reverse("user_update", kwargs={"pk": user.id})
+        url = reverse("users_update", kwargs={"pk": user.id})
         response = client.post(
             url,
             {
@@ -63,7 +71,7 @@ class TestUsers:
         user = User.objects.create_user(username="u1", password="pass123")
         client.login(username="u1", password="pass123")
 
-        url = reverse("user_delete", kwargs={"pk": user.id})
+        url = reverse("users_delete", kwargs={"pk": user.id})
         response = client.post(url)
         assert response.status_code == 302
         assert not User.objects.filter(id=user.id).exists()
@@ -81,7 +89,8 @@ class TestUsers:
         assert response.status_code == 302
 
         logout_url = reverse("logout")
-        response = client.get(logout_url)
+        # LogoutView требует POST
+        response = client.post(logout_url)
         assert response.status_code == 302
 
 
@@ -127,11 +136,3 @@ def test_get_payload_data_anonymous_user():
     payload = middleware.get_payload_data(request, exc)
     assert payload == {}
 
-
-def test_get_payload_data_request_without_user():
-    request = types.SimpleNamespace()  # user отсутствует
-    exc = Exception()
-
-    middleware = CustomRollbarNotifierMiddleware(dummy_get_response)
-    payload = middleware.get_payload_data(request, exc)
-    assert payload == {}

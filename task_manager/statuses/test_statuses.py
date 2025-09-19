@@ -1,3 +1,5 @@
+import os
+
 import pytest
 from django.contrib.auth import get_user_model
 from django.urls import reverse
@@ -7,7 +9,8 @@ from task_manager.tasks.models import Task
 from .models import Status
 
 User = get_user_model()
-TEST_USER_PASSWORD = "testpass123"
+TEST_USER_PASSWORD = os.getenv("TEST_PASSWORD", "default_test_pass")
+
 
 @pytest.mark.django_db
 class TestStatusCRUD:

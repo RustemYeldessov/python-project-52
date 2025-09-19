@@ -44,6 +44,6 @@ ci-migrate:
 	uv run python manage.py migrate --noinput
 
 ci-test:
-	uv run coverage run --omit='*/migrations/*,*/settings.py,*/venv/*,*/.venv/*' -m pytest tests --ds=task_manager.settings --reuse-db
+	uv run coverage run --omit='*/migrations/*,*/settings.py,*/venv/*,*/.venv/*' -m pytest task_manager --ds=task_manager.settings --reuse-db
 	uv run coverage xml
 	uv run coverage report --show-missing --skip-covered

@@ -7,8 +7,9 @@ on:
     branches: [ "main" ]
 
 jobs:
-  sonarcloud:
+  build-and-sonar:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
         with:
@@ -32,7 +33,13 @@ jobs:
         run: make ci-test
 
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
+        uses: SonarSource/sonarqube-scan-action@v5.0.0
+        with:
+          args: >
+            -Dsonar.projectKey=RustemYeldessov_python-project-52
+            -Dsonar.organization=rustemyeldessov
+            -Dsonar.sources=.
+            -Dsonar.python.coverage.reportPaths=coverage.xml
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

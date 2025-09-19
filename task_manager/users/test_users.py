@@ -3,7 +3,6 @@ import pytest
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AnonymousUser
 from django.urls import reverse
-from unittest.mock import patch
 from django.conf import settings
 
 from task_manager.rollbar_middleware import CustomRollbarNotifierMiddleware
